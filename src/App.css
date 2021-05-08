@@ -1,38 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap');
+
 .App {
-  text-align: center;
+	text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.heading {
+	margin: 2rem;
+	font-family: 'Dosis', 'Roboto';
+	font-weight: bold;
+	color: #383838;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content {
+	height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+	margin: 2rem;
+	font-family: 'Dosis', 'Roboto';
+	font-weight: bold;
+	color: #383838;
 }
 
-.App-link {
-  color: #61dafb;
+.main {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	text-align: center;
+	border-radius: 0.35rem;
+	padding: 2rem;
+}
+
+.buttons {
+	margin-top: 2rem;
+}
+
+.buttons > button {
+	font-family: 'Dosis', 'Roboto';
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 16px;
+	border: 2px solid #3f51b5;
+	background-color: #3f51b5;
+	color: #fff;
+	border-radius: 100px;
+	outline: none;
+	cursor: pointer;
+	padding: 6px 24px;
+	margin: 0 0.5rem;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+
+@media (hover: hover) {
+	.form * button:hover {
+		box-shadow: 3px 3px 0px rgb(158, 166, 214);
+		transform: translateY(-3px) translateX(-3px);
+	}
+}
+
+.DoctorImage {
+	width: 75%;
+	height: 75%;
 }
