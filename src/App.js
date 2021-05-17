@@ -7,55 +7,89 @@ import Doctor from './assets/Doctors1.png';
 import DoctorNext from './assets/Doctors3.png';
 import Tabletop from 'tabletop';
 import Emotions from './emotionsChart';
+import Conditions from './conditionsChart';
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			totalData: [],
 			condition: '',
-			medicines: [],
-			predictions: [],
-			dataFlag: false,
-			emotionsData: [],
+			conditionsFlag: false,
+			conditionsData: [],
+			uniqueConditions: [],
+			conditionDrugs: [],
+			conditionsPredictions: [],
 			drug: '',
-			drugSelected: [],
 			drugFlag: false,
+			emotionsData: [],
+			drugSelected: [],
 		};
 	}
 
+	handleConditionChange = (event) => {
+		this.setState({
+			condition: event.target.value,
+			conditionsFlag: false,
+			conditionDrugs: [],
+			conditionsPredictions: [],
+		});
+	};
+
 	handleConditionSubmit = (event) => {
 		if (this.state.condition !== '') {
+			var tempConditions = this.state.conditionsData.filter((condition) =>
+				condition.condition.includes(this.state.condition)
+			);
+			var drugs = [];
+			var drugsPred = [];
+			var sum = 0;
+			for (var item, i = 0; (item = tempConditions[i++]); ) {
+				var drugName = item.drugName;
+				var drugPred = item.predictions;
+				sum = sum + parseFloat(drugPred);
+				drugs.push(drugName);
+				drugsPred.push(parseFloat(drugPred));
+			}
+			console.log(sum);
+			console.log(drugsPred);
+			for (var j = 0, length = drugsPred.length; j < length; j++) {
+				drugsPred[j] = 100 * (drugsPred[j] / sum);
+			}
+			console.log(drugsPred);
+			this.setState({
+				conditionsFlag: true,
+				conditionDrugs: drugs,
+				conditionsPredictions: drugsPred,
+			});
 		}
 	};
 
-	handleConditionChange = (event) => {
-		this.setState({ condition: event.target.value });
-	};
-
 	handleConditionClear = (event) => {
-		this.setState({ condition: '', dataFlag: false });
+		this.setState({
+			condition: '',
+			conditionsFlag: false,
+			conditionDrugs: [],
+			conditionsPredictions: [],
+		});
 	};
 
 	handleDrugChange = (event) => {
-		this.setState(
-			{ drug: event.target.value, drugSelected: [], drugFlag: false },
-			() => console.log(this.state.drug)
-		);
+		this.setState({
+			drug: event.target.value,
+			drugSelected: [],
+			drugFlag: false,
+		});
 	};
 
 	handleDrugSubmit = (event) => {
 		if (this.state.drug !== '') {
-			const tempDrug = this.state.emotionsData.filter((drug) =>
+			var tempDrug = this.state.emotionsData.filter((drug) =>
 				drug.DrugName.includes(this.state.drug)
 			);
-			this.setState(
-				{
-					drugSelected: tempDrug,
-					drugFlag: true,
-				},
-				() => console.log(this.state.drugSelected)
-			);
+			this.setState({
+				drugSelected: tempDrug,
+				drugFlag: true,
+			});
 		}
 	};
 
@@ -65,13 +99,26 @@ class App extends Component {
 
 	componentDidMount() {
 		Tabletop.init({
-			key: '1LruvrwScdnPR1wMENxsjsd5W8N26lHpjEdylvUFgtC8',
+			key: '1x6wMW_1i66aLaWAfwLpYd5PDyujEShyHt7bIXU5b4fQ',
 			simpleSheet: true,
-		}).then((data, tabletop) => {
-			this.setState({
-				totalData: data,
+		})
+			.then((data, tabletop) => {
+				this.setState({
+					conditionsData: data,
+				});
+			})
+			.then(() => {
+				var lookup = {};
+				var result = [];
+				for (var item, i = 0; (item = this.state.conditionsData[i++]); ) {
+					var condition = item.condition;
+					if (!(condition in lookup)) {
+						lookup[condition] = 1;
+						result.push(condition);
+					}
+				}
+				this.setState({ uniqueConditions: result });
 			});
-		});
 
 		Tabletop.init({
 			key: '1y0tJFI-PgyzZMnH96qzaSmjFp-6aU_Co2NeIT5w4Q9o',
@@ -92,6 +139,18 @@ class App extends Component {
 						💊
 					</span>
 				</h1>
+				<p className="problemStatement">
+					We understood how Data Science and Text Mining have been of
+					significant importance in the health care industry and aim to answer
+					the following questions through our platform: How to use sentiment
+					analysis and predictive modelling to recommend the most effective
+					drugs for the given condition? What is the emotional inclination of
+					users towards a chosen drug? In this project the main aim is to
+					examine the use of sentiment analysis on drug reviews that can aid in
+					identify new opportunities and challenges for any pharmaceutical
+					business. The project aims at classifying the various reviews on the
+					specified drugs based on their polarity with the aid of their rating.
+				</p>
 				<div className="content">
 					<Grid
 						container
@@ -99,7 +158,7 @@ class App extends Component {
 						justify="center"
 						alignItems="center"
 						spacing={8}
-						style={{ width: '100%', height: '100%', margin: 'auto' }}
+						style={{ width: '100%', height: '80vh', margin: 'auto' }}
 					>
 						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
 							<div className="form">
@@ -117,13 +176,10 @@ class App extends Component {
 									<MenuItem value="" disabled>
 										Condition
 									</MenuItem>
-									{this.state.totalData.map((condition) => {
+									{this.state.uniqueConditions.map((condition) => {
 										return (
-											<MenuItem
-												key={condition['condition']}
-												value={condition['condition']}
-											>
-												{condition['condition']}
+											<MenuItem key={condition} value={condition}>
+												{condition}
 											</MenuItem>
 										);
 									})}
@@ -135,17 +191,21 @@ class App extends Component {
 									>
 										Search
 									</button>
-									<button id="clearButton" onClick={this.handleClear}>
+									<button id="clearButton" onClick={this.handleConditionClear}>
 										Clear
 									</button>
 								</div>
 							</div>
 						</Grid>
 						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
-							{!this.state.dataFlag ? (
+							{!this.state.conditionsFlag ? (
 								<img src={Doctor} className="DoctorImage" alt="Stay Safe ;)" />
 							) : (
-								<h1>Data</h1>
+								<Conditions
+									condition={`Top drug for ${this.state.condition}`}
+									labels={this.state.conditionDrugs}
+									data={this.state.conditionsPredictions}
+								/>
 							)}
 						</Grid>
 					</Grid>
@@ -155,7 +215,7 @@ class App extends Component {
 						justify="center"
 						alignItems="center"
 						spacing={8}
-						style={{ width: '100%', height: '100vh', margin: 'auto' }}
+						style={{ width: '100%', height: '95vh', margin: 'auto' }}
 					>
 						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
 							{!this.state.drugFlag ? (
@@ -201,6 +261,33 @@ class App extends Component {
 							</div>
 						</Grid>
 					</Grid>
+					<div style={{ width: '100%', height: '5vh', margin: 'auto' }}>
+						<p className="footer">
+							Made with {'<3'} by{' '}
+							<a
+								href="mailto:goyal.16@iitj.ac.in"
+								target="_blank"
+								rel="noreferrer"
+							>
+								Aditi,
+							</a>{' '}
+							<a
+								href="mailto:jain.38@iitj.ac.in"
+								target="_blank"
+								rel="noreferrer"
+							>
+								Darshit,
+							</a>{' '}
+							and{' '}
+							<a
+								href="mailto:agarwal.10@iitj.ac.in"
+								target="_blank"
+								rel="noreferrer"
+							>
+								Harsh
+							</a>{' '}
+						</p>
+					</div>
 				</div>
 			</div>
 		);

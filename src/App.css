@@ -5,12 +5,21 @@
 }
 
 .heading {
-	margin: 2rem;
+	margin: 1rem;
 	font-family: 'Dosis', 'Roboto';
 	font-weight: bold;
 	color: #383838;
+	height: 5vh;
+	line-height: 5vh;
 }
 
+.problemStatement {
+	font-family: 'Dosis', 'Roboto';
+	color: #383838;
+	font-size: 1.6rem;
+	padding: 0 2rem;
+	margin: 2rem auto 0;
+}
 .content {
 	height: 100%;
 }
@@ -80,4 +89,20 @@ h1 {
 .DoctorImageNext {
 	width: 85%;
 	height: 85%;
+}
+
+.footer {
+	font-family: 'Dosis', 'Roboto';
+	font-weight: bold;
+	color: #383838;
+	font-size: 1.2rem;
+	height: 5vh;
+	margin: 0;
+	line-height: 5vh;
+	background-color: #c5cae9;
+}
+
+a {
+	text-decoration: none;
+	color: #3f51b5;
 }
