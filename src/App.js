@@ -3,8 +3,9 @@ import './App.css';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Doctor from './assets/Doctors1.png';
-import DoctorNext from './assets/Doctors3.png';
+import Doctor1 from './assets/Doctor1.png';
+import Doctor2 from './assets/Doctor2.png';
+import Doctor3 from './assets/Doctor3.png';
 import Tabletop from 'tabletop';
 import Emotions from './emotionsChart';
 import Conditions from './conditionsChart';
@@ -139,18 +140,33 @@ class App extends Component {
 						💊
 					</span>
 				</h1>
-				<p className="problemStatement">
-					We understood how Data Science and Text Mining have been of
-					significant importance in the health care industry and aim to answer
-					the following questions through our platform: How to use sentiment
-					analysis and predictive modelling to recommend the most effective
-					drugs for the given condition? What is the emotional inclination of
-					users towards a chosen drug? In this project the main aim is to
-					examine the use of sentiment analysis on drug reviews that can aid in
-					identify new opportunities and challenges for any pharmaceutical
-					business. The project aims at classifying the various reviews on the
-					specified drugs based on their polarity with the aid of their rating.
-				</p>
+				<Grid
+					container
+					direction="row"
+					justify="center"
+					alignItems="center"
+					spacing={8}
+					style={{ width: '100%', height: '90vh', margin: 'auto' }}
+				>
+					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+						<p className="problemStatement">
+							We understood how Data Science and Text Mining have been of
+							significant importance in the health care industry and aim to
+							answer the following questions through our platform: How to use
+							sentiment analysis and predictive modelling to recommend the most
+							effective drugs for the given condition? What is the emotional
+							inclination of users towards a chosen drug? In this project the
+							main aim is to examine the use of sentiment analysis on drug
+							reviews that can aid in identify new opportunities and challenges
+							for any pharmaceutical business. The project aims at classifying
+							the various reviews on the specified drugs based on their polarity
+							with the aid of their rating.
+						</p>
+					</Grid>
+					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+						<img src={Doctor1} className="DoctorImage1" alt="Stay Safe ;)" />
+					</Grid>
+				</Grid>
 				<div className="content">
 					<Grid
 						container
@@ -158,8 +174,23 @@ class App extends Component {
 						justify="center"
 						alignItems="center"
 						spacing={8}
-						style={{ width: '100%', height: '80vh', margin: 'auto' }}
+						style={{ width: '100%', height: '100vh', margin: 'auto' }}
 					>
+						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+							{!this.state.conditionsFlag ? (
+								<img
+									src={Doctor2}
+									className="DoctorImage2"
+									alt="Stay Safe ;)"
+								/>
+							) : (
+								<Conditions
+									condition={`Top drug for ${this.state.condition}`}
+									labels={this.state.conditionDrugs}
+									data={this.state.conditionsPredictions}
+								/>
+							)}
+						</Grid>
 						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
 							<div className="form">
 								<p className="description">
@@ -197,17 +228,6 @@ class App extends Component {
 								</div>
 							</div>
 						</Grid>
-						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
-							{!this.state.conditionsFlag ? (
-								<img src={Doctor} className="DoctorImage" alt="Stay Safe ;)" />
-							) : (
-								<Conditions
-									condition={`Top drug for ${this.state.condition}`}
-									labels={this.state.conditionDrugs}
-									data={this.state.conditionsPredictions}
-								/>
-							)}
-						</Grid>
 					</Grid>
 					<Grid
 						container
@@ -217,17 +237,6 @@ class App extends Component {
 						spacing={8}
 						style={{ width: '100%', height: '95vh', margin: 'auto' }}
 					>
-						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
-							{!this.state.drugFlag ? (
-								<img
-									src={DoctorNext}
-									className="DoctorImageNext"
-									alt="Stay Safe ;)"
-								/>
-							) : (
-								<Emotions drugData={this.state.drugSelected} />
-							)}
-						</Grid>
 						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
 							<div className="form">
 								<p className="description">
@@ -259,6 +268,17 @@ class App extends Component {
 									</button>
 								</div>
 							</div>
+						</Grid>
+						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+							{!this.state.drugFlag ? (
+								<img
+									src={Doctor3}
+									className="DoctorImage3"
+									alt="Stay Safe ;)"
+								/>
+							) : (
+								<Emotions drugData={this.state.drugSelected} />
+							)}
 						</Grid>
 					</Grid>
 					<div style={{ width: '100%', height: '5vh', margin: 'auto' }}>
