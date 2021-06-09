@@ -7,8 +7,8 @@ import Doctor1 from './assets/Doctor1.png';
 import Doctor2 from './assets/Doctor2.png';
 import Doctor3 from './assets/Doctor3.png';
 import Tabletop from 'tabletop';
-import Emotions from './emotionsChart';
-import Conditions from './conditionsChart';
+import Emotions from './components/emotionsChart';
+import Conditions from './components/conditionsChart';
 
 class App extends Component {
 	constructor() {
@@ -51,12 +51,9 @@ class App extends Component {
 				drugs.push(drugName);
 				drugsPred.push(parseFloat(drugPred));
 			}
-			console.log(sum);
-			console.log(drugsPred);
 			for (var j = 0, length = drugsPred.length; j < length; j++) {
 				drugsPred[j] = 100 * (drugsPred[j] / sum);
 			}
-			console.log(drugsPred);
 			this.setState({
 				conditionsFlag: true,
 				conditionDrugs: drugs,
@@ -134,12 +131,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<h1 className="heading">
-					Pill Recommendation System{' '}
-					<span role="img" aria-label="wink">
-						💊
-					</span>
-				</h1>
+				<h1 className="heading">Pill Recommendation System 💊</h1>
 				<Grid
 					container
 					direction="row"
@@ -167,147 +159,134 @@ class App extends Component {
 						<img src={Doctor1} className="DoctorImage1" alt="Stay Safe ;)" />
 					</Grid>
 				</Grid>
-				<div className="content">
-					<Grid
-						container
-						direction="row"
-						justify="center"
-						alignItems="center"
-						spacing={8}
-						style={{ width: '100%', height: '100vh', margin: 'auto' }}
-					>
-						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
-							{!this.state.conditionsFlag ? (
-								<img
-									src={Doctor2}
-									className="DoctorImage2"
-									alt="Stay Safe ;)"
-								/>
-							) : (
-								<Conditions
-									condition={`Top drug for ${this.state.condition}`}
-									labels={this.state.conditionDrugs}
-									data={this.state.conditionsPredictions}
-								/>
-							)}
-						</Grid>
-						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
-							<div className="form">
-								<p className="description">
-									Analyzing the drugs descriptions, conditions, reviews and then
-									recommending it using Deep Learning Models, for each health
-									condition of a patient
-								</p>
-								<Select
-									displayEmpty
-									style={{ width: '50%' }}
-									value={this.state.condition}
-									onChange={this.handleConditionChange}
-								>
-									<MenuItem value="" disabled>
-										Condition
-									</MenuItem>
-									{this.state.uniqueConditions.map((condition) => {
-										return (
-											<MenuItem key={condition} value={condition}>
-												{condition}
-											</MenuItem>
-										);
-									})}
-								</Select>
-								<div className="buttons">
-									<button
-										id="submitButton"
-										onClick={this.handleConditionSubmit}
-									>
-										Search
-									</button>
-									<button id="clearButton" onClick={this.handleConditionClear}>
-										Clear
-									</button>
-								</div>
-							</div>
-						</Grid>
+				<Grid
+					container
+					direction="row"
+					justify="center"
+					alignItems="center"
+					spacing={8}
+					style={{ width: '100%', height: '100vh', margin: 'auto' }}
+				>
+					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+						{!this.state.conditionsFlag ? (
+							<img src={Doctor2} className="DoctorImage2" alt="Stay Safe ;)" />
+						) : (
+							<Conditions
+								condition={`Top drug for ${this.state.condition}`}
+								labels={this.state.conditionDrugs}
+								data={this.state.conditionsPredictions}
+							/>
+						)}
 					</Grid>
-					<Grid
-						container
-						direction="row"
-						justify="center"
-						alignItems="center"
-						spacing={8}
-						style={{ width: '100%', height: '95vh', margin: 'auto' }}
-					>
-						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
-							<div className="form">
-								<p className="description">
-									Check emotions associated with a particular drug
-								</p>
-								<Select
-									displayEmpty
-									style={{ width: '50%' }}
-									value={this.state.drug}
-									onChange={this.handleDrugChange}
-								>
-									<MenuItem value="" disabled>
-										Drug
-									</MenuItem>
-									{this.state.emotionsData.map((drug) => {
-										return (
-											<MenuItem key={drug['DrugName']} value={drug['DrugName']}>
-												{drug['DrugName']}
-											</MenuItem>
-										);
-									})}
-								</Select>
-								<div className="buttons">
-									<button id="submitButton" onClick={this.handleDrugSubmit}>
-										Search
-									</button>
-									<button id="clearButton" onClick={this.handleDrugClear}>
-										Clear
-									</button>
-								</div>
+					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+						<div className="form">
+							<p className="description">
+								Analyzing the drugs descriptions, conditions, reviews and then
+								recommending it using Deep Learning Models, for each health
+								condition of a patient
+							</p>
+							<Select
+								displayEmpty
+								style={{ width: '50%' }}
+								value={this.state.condition}
+								onChange={this.handleConditionChange}
+							>
+								<MenuItem value="" disabled>
+									Condition
+								</MenuItem>
+								{this.state.uniqueConditions.map((condition) => {
+									return (
+										<MenuItem key={condition} value={condition}>
+											{condition}
+										</MenuItem>
+									);
+								})}
+							</Select>
+							<div className="buttons">
+								<button id="submitButton" onClick={this.handleConditionSubmit}>
+									Search
+								</button>
+								<button id="clearButton" onClick={this.handleConditionClear}>
+									Clear
+								</button>
 							</div>
-						</Grid>
-						<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
-							{!this.state.drugFlag ? (
-								<img
-									src={Doctor3}
-									className="DoctorImage3"
-									alt="Stay Safe ;)"
-								/>
-							) : (
-								<Emotions drugData={this.state.drugSelected} />
-							)}
-						</Grid>
+						</div>
 					</Grid>
-					<div style={{ width: '100%', height: '5vh', margin: 'auto' }}>
-						<p className="footer">
-							Made with {'<3'} by{' '}
-							<a
-								href="mailto:goyal.16@iitj.ac.in"
-								target="_blank"
-								rel="noreferrer"
+				</Grid>
+				<Grid
+					container
+					direction="row"
+					justify="center"
+					alignItems="center"
+					spacing={8}
+					style={{ width: '100%', height: '95vh', margin: 'auto' }}
+				>
+					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+						<div className="form">
+							<p className="description">
+								Check emotions associated with a particular drug
+							</p>
+							<Select
+								displayEmpty
+								style={{ width: '50%' }}
+								value={this.state.drug}
+								onChange={this.handleDrugChange}
 							>
-								Aditi,
-							</a>{' '}
-							<a
-								href="mailto:jain.38@iitj.ac.in"
-								target="_blank"
-								rel="noreferrer"
-							>
-								Darshit,
-							</a>{' '}
-							and{' '}
-							<a
-								href="mailto:agarwal.10@iitj.ac.in"
-								target="_blank"
-								rel="noreferrer"
-							>
-								Harsh
-							</a>{' '}
-						</p>
-					</div>
+								<MenuItem value="" disabled>
+									Drug
+								</MenuItem>
+								{this.state.emotionsData.map((drug) => {
+									return (
+										<MenuItem key={drug['DrugName']} value={drug['DrugName']}>
+											{drug['DrugName']}
+										</MenuItem>
+									);
+								})}
+							</Select>
+							<div className="buttons">
+								<button id="submitButton" onClick={this.handleDrugSubmit}>
+									Search
+								</button>
+								<button id="clearButton" onClick={this.handleDrugClear}>
+									Clear
+								</button>
+							</div>
+						</div>
+					</Grid>
+					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
+						{!this.state.drugFlag ? (
+							<img src={Doctor3} className="DoctorImage3" alt="Stay Safe ;)" />
+						) : (
+							<Emotions drugData={this.state.drugSelected} />
+						)}
+					</Grid>
+				</Grid>
+				<div style={{ width: '100%', height: '5vh', margin: 'auto' }}>
+					<p className="footer">
+						Made with {'<3'} by{' '}
+						<a
+							href="mailto:goyal.16@iitj.ac.in"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Aditi,
+						</a>{' '}
+						<a
+							href="mailto:jain.38@iitj.ac.in"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Darshit,
+						</a>{' '}
+						and{' '}
+						<a
+							href="mailto:agarwal.10@iitj.ac.in"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Harsh
+						</a>{' '}
+					</p>
 				</div>
 			</div>
 		);
