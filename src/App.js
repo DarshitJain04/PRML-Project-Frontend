@@ -138,7 +138,7 @@ class App extends Component {
 					justify="center"
 					alignItems="center"
 					spacing={8}
-					style={{ width: '100%', height: '90vh', margin: 'auto' }}
+					style={{ width: '100%', height: 'auto', margin: 'auto' }}
 				>
 					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
 						<p className="problemStatement">
@@ -165,7 +165,7 @@ class App extends Component {
 					justify="center"
 					alignItems="center"
 					spacing={8}
-					style={{ width: '100%', height: '100vh', margin: 'auto' }}
+					style={{ width: '100%', height: 'auto', margin: 'auto' }}
 				>
 					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
 						{!this.state.conditionsFlag ? (
@@ -219,7 +219,7 @@ class App extends Component {
 					justify="center"
 					alignItems="center"
 					spacing={8}
-					style={{ width: '100%', height: '95vh', margin: 'auto' }}
+					style={{ width: '100%', height: 'auto', margin: 'auto' }}
 				>
 					<Grid item xs={12} sm={12} md={6} lg={6} style={{ margin: 'auto' }}>
 						<div className="form">

@@ -5,20 +5,20 @@
 }
 
 .heading {
-	margin: 1rem;
+	margin: 1.5rem 1rem 1rem 1rem;
 	font-family: 'Dosis', 'Roboto';
 	font-weight: bold;
 	color: #383838;
-	height: 10vh;
-	line-height: 10vh;
+	height: 5vh;
+	line-height: 5vh;
 }
 
 .problemStatement {
 	font-family: 'Dosis', 'Roboto';
 	color: #383838;
-	font-weight: 400;
-	font-size: 2rem;
-	margin: auto;
+	font-weight: 500;
+	font-size: 1.6rem;
+	margin: 3rem auto 2rem;
 }
 
 h1 {
