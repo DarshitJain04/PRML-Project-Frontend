@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Doctor1 from './assets/Doctor1.png';
 import Doctor2 from './assets/Doctor2.png';
 import Doctor3 from './assets/Doctor3.png';
-import Tabletop from 'tabletop';
+import Papa from 'papaparse';
 import Emotions from './components/emotionsChart';
 import Conditions from './components/conditionsChart';
 
@@ -96,19 +96,16 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		Tabletop.init({
-			key: '1x6wMW_1i66aLaWAfwLpYd5PDyujEShyHt7bIXU5b4fQ',
-			simpleSheet: true,
-		})
-			.then((data, tabletop) => {
-				this.setState({
-					conditionsData: data,
+		Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vR_ozzHasAg1_NT8eqAOArKj0TmB4CfnAush6ANoC42RGkoJlhneXXUpCt10IMt_-3Gzg_28toBwF32/pub?output=csv', {
+			download: true,
+			header: true,
+			complete: function(results) {
+			  	this.setState({
+					conditionsData: results.data,
 				});
-			})
-			.then(() => {
 				var lookup = {};
 				var result = [];
-				for (var item, i = 0; (item = this.state.conditionsData[i++]); ) {
+				for (var item, i = 0; (item = results.data[i++]); ) {
 					var condition = item.condition;
 					if (!(condition in lookup)) {
 						lookup[condition] = 1;
@@ -116,15 +113,17 @@ class App extends Component {
 					}
 				}
 				this.setState({ uniqueConditions: result });
-			});
+			}.bind(this),
+		});
 
-		Tabletop.init({
-			key: '1y0tJFI-PgyzZMnH96qzaSmjFp-6aU_Co2NeIT5w4Q9o',
-			simpleSheet: true,
-		}).then((data, tabletop) => {
-			this.setState({
-				emotionsData: data,
-			});
+		Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vTaw_Vgx_BgHNIXm9YvLbYLzDtnVYYadXk6FpOrtuxA93aRoUhc9rdwKKtA9Mfo-fokp6sZIV9X4kPD/pub?output=csv', {
+			download: true,
+			header: true,
+			complete: function(results) {
+				this.setState({
+					emotionsData: results.data,
+				});
+			}.bind(this),
 		});
 	}
 
