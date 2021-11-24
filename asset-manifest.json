@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/PRML-Project-Frontend/static/css/main.56fbbc78.chunk.css",
-    "main.js": "/PRML-Project-Frontend/static/js/main.bd72c618.chunk.js",
-    "main.js.map": "/PRML-Project-Frontend/static/js/main.bd72c618.chunk.js.map",
-    "runtime-main.js": "/PRML-Project-Frontend/static/js/runtime-main.8c7b9164.js",
-    "runtime-main.js.map": "/PRML-Project-Frontend/static/js/runtime-main.8c7b9164.js.map",
-    "static/js/2.857916cd.chunk.js": "/PRML-Project-Frontend/static/js/2.857916cd.chunk.js",
-    "static/js/2.857916cd.chunk.js.map": "/PRML-Project-Frontend/static/js/2.857916cd.chunk.js.map",
-    "static/js/3.3f3a372f.chunk.js": "/PRML-Project-Frontend/static/js/3.3f3a372f.chunk.js",
-    "static/js/3.3f3a372f.chunk.js.map": "/PRML-Project-Frontend/static/js/3.3f3a372f.chunk.js.map",
+    "main.css": "/PRML-Project-Frontend/static/css/main.a372d292.chunk.css",
+    "main.js": "/PRML-Project-Frontend/static/js/main.f5fa376b.chunk.js",
+    "main.js.map": "/PRML-Project-Frontend/static/js/main.f5fa376b.chunk.js.map",
+    "runtime-main.js": "/PRML-Project-Frontend/static/js/runtime-main.896d572a.js",
+    "runtime-main.js.map": "/PRML-Project-Frontend/static/js/runtime-main.896d572a.js.map",
+    "static/js/2.c746cf81.chunk.js": "/PRML-Project-Frontend/static/js/2.c746cf81.chunk.js",
+    "static/js/2.c746cf81.chunk.js.map": "/PRML-Project-Frontend/static/js/2.c746cf81.chunk.js.map",
+    "static/js/3.3f47b917.chunk.js": "/PRML-Project-Frontend/static/js/3.3f47b917.chunk.js",
+    "static/js/3.3f47b917.chunk.js.map": "/PRML-Project-Frontend/static/js/3.3f47b917.chunk.js.map",
     "index.html": "/PRML-Project-Frontend/index.html",
-    "static/css/main.56fbbc78.chunk.css.map": "/PRML-Project-Frontend/static/css/main.56fbbc78.chunk.css.map",
-    "static/js/2.857916cd.chunk.js.LICENSE.txt": "/PRML-Project-Frontend/static/js/2.857916cd.chunk.js.LICENSE.txt",
+    "static/css/main.a372d292.chunk.css.map": "/PRML-Project-Frontend/static/css/main.a372d292.chunk.css.map",
+    "static/js/2.c746cf81.chunk.js.LICENSE.txt": "/PRML-Project-Frontend/static/js/2.c746cf81.chunk.js.LICENSE.txt",
     "static/media/Doctor1.4b5526fa.png": "/PRML-Project-Frontend/static/media/Doctor1.4b5526fa.png",
     "static/media/Doctor2.5f2049e6.png": "/PRML-Project-Frontend/static/media/Doctor2.5f2049e6.png",
     "static/media/Doctor3.127fc5ab.png": "/PRML-Project-Frontend/static/media/Doctor3.127fc5ab.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.8c7b9164.js",
-    "static/js/2.857916cd.chunk.js",
-    "static/css/main.56fbbc78.chunk.css",
-    "static/js/main.bd72c618.chunk.js"
+    "static/js/runtime-main.896d572a.js",
+    "static/js/2.c746cf81.chunk.js",
+    "static/css/main.a372d292.chunk.css",
+    "static/js/main.f5fa376b.chunk.js"
   ]
 }
